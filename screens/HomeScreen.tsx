@@ -30,7 +30,7 @@ const HomeScreen = () => {
                     title={i.item.title}
                     index={i.index}
                     onRemovePressed={() => removeBlog(i.index)}
-                    onTitlePressed={() => navigation.navigate('Blog')}
+                    onTitlePressed={() => navigation.navigate('BlogDetails')}
                 />
                 }
             />
