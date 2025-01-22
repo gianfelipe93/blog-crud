@@ -6,6 +6,7 @@ type BlogContextType = {
     addBlog: (blog: Blog) => void;
     editBlog: (index: number, newBlog: Blog) => void;
     removeBlog: (index: number) => void
+    getBlogByIndex: (index: number) => Blog
 }
 
 const BlogContext = createContext<BlogContextType | null>(null)
@@ -25,8 +26,10 @@ const BlogProvider = ({ children }: { children: ReactNode }) => {
         setBlogs(blogs.filter((_: Blog, i: number) => (i !== index)))
     }
 
+    const getBlogByIndex = (index: number) => (blogs[index])
+
     return (
-        <BlogContext.Provider value={{ blogs, addBlog, editBlog, removeBlog }}>
+        <BlogContext.Provider value={{ blogs, addBlog, editBlog, removeBlog, getBlogByIndex }}>
             {children}
         </BlogContext.Provider>
     )

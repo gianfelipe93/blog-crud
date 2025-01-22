@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import * as React from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign';
-import { useBlogs } from '../context/blogContext';
+import { useBlogs } from '../context/BlogContext';
 import BlogRow from '../components/BlogRow';
 
 const HomeScreen = () => {
@@ -13,7 +13,7 @@ const HomeScreen = () => {
         navigation.setOptions({
             headerRight: () => {
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('New')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('New', {})}>
                         <AntDesign name="plus" size={24} color="black" />
                     </TouchableOpacity>
                 )
@@ -30,7 +30,7 @@ const HomeScreen = () => {
                     title={i.item.title}
                     index={i.index}
                     onRemovePressed={() => removeBlog(i.index)}
-                    onTitlePressed={() => navigation.navigate('BlogDetails')}
+                    onTitlePressed={() => navigation.navigate('View', { index: i.index })}
                 />
                 }
             />
