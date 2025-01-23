@@ -3,6 +3,7 @@ import { createStaticNavigation, StaticParamList } from '@react-navigation/nativ
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import BlogForm from './components/BlogForm';
+import { BlogProvider } from './context/BlogContext';
 
 type RootType = {
   View: { mode?: 'view' | 'add' | 'edit'; index: number };
@@ -11,14 +12,14 @@ type RootType = {
   Home: undefined
 }
 
-
 const Root = createNativeStackNavigator<RootType>({
   screens: {
     Home: {
       screen: HomeScreen,
       options: {
-        title: "Blog Posts"
-      }
+        title: "Blog Posts",
+        headerLeft: () => (<></>)
+      },
     },
     New: {
       screen: BlogForm,
@@ -49,7 +50,9 @@ declare global {
 }
 
 const App = () => (
-  <Navigation />
+  <BlogProvider>
+    <Navigation />
+  </BlogProvider>
 )
 
 export default App

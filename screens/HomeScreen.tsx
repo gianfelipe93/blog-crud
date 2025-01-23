@@ -13,7 +13,7 @@ const HomeScreen = () => {
         navigation.setOptions({
             headerRight: () => {
                 return (
-                    <TouchableOpacity onPress={() => navigation.navigate('New', {})}>
+                    <TouchableOpacity onPressIn={() => navigation.navigate('New', {})}>
                         <AntDesign name="plus" size={24} color="black" />
                     </TouchableOpacity>
                 )

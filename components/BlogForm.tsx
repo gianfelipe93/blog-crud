@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, Button } from 'react-native'
-import { useBlogs } from '../context/BlogContext'
+import { useBlogs, BlogProvider } from '../context/BlogContext'
 import { useNavigation } from '@react-navigation/native'
 import Entypo from '@expo/vector-icons/Entypo';
 import { Blog } from '../types/Blog';
@@ -18,9 +18,9 @@ const BlogForm = ({ route }: FormType) => {
 
     const isEditing = mode === 'edit'
     const isViewing = mode === 'view'
-    const isAdding = mode === 'create'
+    const isAdding = mode === 'add'
 
-    const currentBlog: Blog = isEditing ? { title: '', body: '' } : getBlogByIndex(index);
+    const currentBlog: Blog = isAdding ? { title: '', body: '' } : getBlogByIndex(index);
     const [form, setForm] = useState<Blog>(currentBlog)
 
     const editForm = (field: string, value: string) => {
@@ -57,8 +57,8 @@ const BlogForm = ({ route }: FormType) => {
     return (
         <View style={styles.container}>
             <View style={styles.panel}>
-                <TextInput editable={isEditing} value={form.title} style={styles.title} onChangeText={(text: string) => editForm('title', text)}></TextInput>
-                <TextInput editable={isEditing} value={form.body} style={styles.body} onChangeText={(text: string) => editForm('body', text)}></TextInput>
+                <TextInput editable={!isViewing} value={form.title} style={styles.title} onChangeText={(text: string) => editForm('title', text)}></TextInput>
+                <TextInput editable={!isViewing} value={form.body} style={styles.body} onChangeText={(text: string) => editForm('body', text)}></TextInput>
                 {(isEditing || isAdding) && <Button title='SUBMIT' onPress={onSubmit} />}
             </View>
         </View>
