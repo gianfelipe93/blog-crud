@@ -31,11 +31,11 @@ const BlogForm = ({ route }: FormType) => {
     }
 
     useLayoutEffect(() => {
-        if (!isViewing) {
+        if (isViewing) {
             navigation.setOptions({
                 headerRight: () => {
                     return (
-                        <TouchableOpacity onPress={() => navigation.navigate('Edit', { index })}>
+                        <TouchableOpacity onPressIn={() => navigation.navigate('Edit', { index })}>
                             <Entypo name="pencil" size={24} color="black" />
                         </TouchableOpacity>
                     )
@@ -57,12 +57,16 @@ const BlogForm = ({ route }: FormType) => {
     return (
         <View style={styles.container}>
             <View style={styles.panel}>
-                <TextInput editable={!isViewing} value={form.title} style={styles.title} onChangeText={(text: string) => editForm('title', text)}></TextInput>
-                <TextInput editable={!isViewing} value={form.body} style={styles.body} onChangeText={(text: string) => editForm('body', text)}></TextInput>
+                <TextInput placeholder='title' editable={!isViewing} value={form.title} style={styles.title} onChangeText={(text: string) => editForm('title', text)}></TextInput>
+                <TextInput placeholder='body' editable={!isViewing} value={form.body} style={styles.body} onChangeText={(text: string) => editForm('body', text)}></TextInput>
                 {(isEditing || isAdding) && <Button title='SUBMIT' onPress={onSubmit} />}
             </View>
         </View>
     )
+}
+
+const inputStyling = {
+    backgroundColor: 'lightgrey'
 }
 
 const styles = StyleSheet.create({
@@ -70,16 +74,21 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     panel: {
-        borderColor: 'black',
+        borderColor: 'grey',
         borderWidth: 2,
-        backgroundColor: 'grey'
+        backgroundColor: 'white',
+        padding: 10
     },
     title: {
         fontSize: 15,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        ...inputStyling
     },
     body: {
-        fontSize: 12
+        fontSize: 12,
+        marginTop: 10,
+        marginBottom: 10,
+        ...inputStyling
     }
 })
 
